@@ -23,5 +23,8 @@ export default class Fin extends Phaser.Scene {
       "Estrellas recolectadas: " + this.cantidadEstrellas,
       { fontSize: "15px", fill: "#FFFFFF" }
     );
+
+    // add "game over" text
+    this.gameOverTexto = this.add.text(350, 300, "The End", { fontSize: "30px", fill: "#E11616"});
   }
 }
