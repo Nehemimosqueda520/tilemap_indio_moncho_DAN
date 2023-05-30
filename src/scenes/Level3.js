@@ -1,7 +1,7 @@
-export default class Level2 extends Phaser.Scene {
+export default class Level3 extends Phaser.Scene {
 
     constructor() {
-        super({ key: 'level2' });
+        super({ key: 'level3' });
     }
 
     init(data) {
@@ -11,7 +11,7 @@ export default class Level2 extends Phaser.Scene {
 
     create () {
       // todo / para hacer: texto de puntaje
-      const map = this.make.tilemap({ key: "map2" });
+      const map = this.make.tilemap({ key: "map3" });
 
       // Parameters are the name you gave the tileset in Tiled and then the key of the tileset image in
       // Phaser's cache (i.e. the name you used in preload)
@@ -95,7 +95,7 @@ export default class Level2 extends Phaser.Scene {
         this.jugador,
         this.salida,
         this.esVencedor,
-        () => this.cantidadEstrellas >= 14, // condicion de ejecucion
+        () => this.cantidadEstrellas >= 33, // condicion de ejecucion
         this
       );
 
@@ -107,7 +107,18 @@ export default class Level2 extends Phaser.Scene {
         { fontSize: "15px", fill: "#FFFFFF" }
       );
 
+      //add camera to follow player
+      this.cameras.main.startFollow(this.jugador);
+
       
+      this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+
+      //camera dont go out of map
+      this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+
+      //fijar texto para que no se mueva con la camara
+      this.cantidadEstrellasTexto.setScrollFactor(0);
+
     }
 
      update() {
@@ -153,7 +164,7 @@ export default class Level2 extends Phaser.Scene {
 
     console.log("estrellas recolectadas", this.cantidadEstrellas);
 
-    this.scene.start("level3", {
+    this.scene.start("fin", {
       cantidadEstrellas: this.cantidadEstrellas,
       y: "este es un dato de muestra",
       z: "este es otro atributo enviado a otro escena",
